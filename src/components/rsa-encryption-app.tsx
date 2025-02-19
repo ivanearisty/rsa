@@ -128,13 +128,23 @@ export default function RSAEncryptionApp() {
         <div className="space-y-4">
           <div>
             <Label htmlFor="publicKey">Public RSA Key</Label>
-            <Textarea
-              id="publicKey"
-              value={publicKeyPEM}
-              onChange={(e) => setPublicKeyPEM(e.target.value)}
-              placeholder="Public RSA Key"
-              className="h-40 border border-black dark:border-white"
-            />
+            <div className="flex gap-2 items-start">
+              <Textarea
+                id="publicKey"
+                value={publicKeyPEM}
+                onChange={(e) => setPublicKeyPEM(e.target.value)}
+                placeholder="Public RSA Key"
+                className="h-40 border border-black dark:border-white"
+              />
+              <Button
+                size="icon"
+                variant="ghost"
+                className="self-start active:scale-95 transition-transform"
+                onClick={() => copyToClipboard(publicKeyPEM)}
+              >
+                <Copy className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
           <div>
             <Label htmlFor="encryptText">Text to Encrypt</Label>
@@ -200,7 +210,7 @@ export default function RSAEncryptionApp() {
             <div className="flex gap-2 items-start">
               <Textarea
                 id="decryptedText"
-				ref={decryptedTextAreaRef}
+				        ref={decryptedTextAreaRef}
                 value={decryptedText}
                 readOnly
                 placeholder="Decrypted text will appear here"
